@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Пекарня "Золотая Корочка" — Свежий хлеб каждый день</title>
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: 'Georgia', serif;
+    background: #fdf6ec;
+    color: #3b2a1a;
+    line-height: 1.6;
+  }
+
+  /* ===== ШАПКА ===== */
+  header {
+    background: linear-gradient(135deg, #6b3e1c 0%, #8b5a2b 100%);
+    color: #fff;
+    padding: 20px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+  }
+
+  .logo {
+    font-size: 28px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .logo span {
+    color: #f4c430;
+  }
+
+  nav ul {
+    list-style: none;
+    display: flex;
+    gap: 30px;
+  }
+
+  nav a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 17px;
+    transition: color 0.3s;
+    position: relative;
+  }
+
+  nav a:hover {
+    color: #f4c430;
+  }
+
+  nav a::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: #f4c430;
+    transition: width 0.3s;
+  }
+
+  nav a:hover::after {
+    width: 100%;
+  }
+
+  /* ===== ГЕРОЙ-СЕКЦИЯ ===== */
+  .hero {
+    height: 90vh;
+    background: linear-gradient(rgba(59, 42, 26, 0.6), rgba(59, 42, 26, 0.7)),
+                url('https://images.unsplash.com/photo-1509440159596-0249088772ff?w=1600') center/cover no-repeat;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: #fff;
+    padding: 0 20px;
+    animation: fadeIn 1.5s ease;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  .hero h1 {
+    font-size: 64px;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 10px rgba(0,0,0,0.5);
+    animation: slideUp 1s ease;
+  }
+
+  .hero p {
+    font-size: 22px;
+    margin-bottom: 35px;
+    max-width: 700px;
+    animation: slideUp 1.2s ease;
+  }
+
+  @keyframes slideUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .btn {
+    display: inline-block;
+    padding: 15px 45px;
+    background: #f4c430;
+    color: #3b2a1a;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 50px;
+    transition: all 0.3s;
+    box-shadow: 0 5px 20px rgba(244, 196, 48, 0.4);
+    border: none;
+    cursor: pointer;
+  }
+
+  .btn:hover {
+    background: #fff;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(244, 196, 48, 0.6);
+  }
+
+  /* ===== СЕКЦИИ ===== */
+  section {
+    padding: 80px 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .section-title {
+    text-align: center;
+    font-size: 42px;
+    margin-bottom: 15px;
+    color: #6b3e1c;
+  }
+
+  .section-subtitle {
+    text-align: center;
+    font-size: 18px;
+    color: #8b5a2b;
+    margin-bottom: 50px;
+    font-style: italic;
+  }
+
+  /* ===== О НАС ===== */
+  .about {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 50px;
+    align-items: center;
+    background: #fff8ed;
+    border-radius: 20px;
+    padding: 50px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+  }
+
+  .about img {
+    width: 100%;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+  }
+
+  .about-text h3 {
+    font-size: 30px;
+    color: #6b3e1c;
+    margin-bottom: 20px;
+  }
+
+  .about-text p {
+    font-size: 17px;
+    margin-bottom: 15px;
+  }
+
+  /* ===== ТОВАРЫ ===== */
+  .products {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+  }
+
+  .product-card {
+    background: #fff;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    transition: transform 0.4s, box-shadow 0.4s;
+    text-align: center;
+  }.product-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(107, 62, 28, 0.25);
+  }
+
+  .product-card img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+  }
+
+  .product-info {
+    padding: 25px;
+  }
+
+  .product-info h3 {
+    font-size: 22px;
+    color: #6b3e1c;
+    margin-bottom: 10px;
+  }
+
+  .product-info p {
+    color: #8b5a2b;
+    margin-bottom: 15px;
+    font-size: 15px;
+  }
+
+  .price {
+    font-size: 24px;
+    font-weight: bold;
+    color: #d4a017;
+  }
+
+  /* ===== ПРЕИМУЩЕСТВА ===== */
+  .features {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 30px;
+    margin-top: 30px;
+  }
+
+  .feature {
+    text-align: center;
+    padding: 30px 20px;
+    background: #fff8ed;
+    border-radius: 15px;
+    transition: transform 0.3s;
+    border: 2px solid transparent;
+  }
+
+  .feature:hover {
+    transform: translateY(-5px);
+    border-color: #f4c430;
+  }
+
+  .feature-icon {
+    font-size: 45px;
+    margin-bottom: 15px;
+  }
+
+  .feature h4 {
+    font-size: 19px;
+    margin-bottom: 10px;
+    color: #6b3e1c;
+  }
+
+  .feature p {
+    font-size: 15px;
+    color: #5a4a3a;
+  }
+
+  /* ===== ФУТЕР ===== */
+  footer {
+    background: #3b2a1a;
+    color: #e0d5c5;
+    padding: 50px 40px 20px;
+    text-align: center;
+  }
+
+  .footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 40px;
+    margin-bottom: 40px;
+    text-align: left;
+  }
+
+  .footer-col h4 {
+    color: #f4c430;
+    margin-bottom: 15px;
+    font-size: 20px;
+  }
+
+  .footer-col p, .footer-col a {
+    color: #e0d5c5;
+    text-decoration: none;
+    display: block;
+    margin-bottom: 8px;
+    transition: color 0.3s;
+  }
+
+  .footer-col a:hover {
+    color: #f4c430;
+  }
+
+  .copyright {
+    border-top: 1px solid #5a4a3a;
+    padding-top: 20px;
+    font-size: 14px;
+  }
+
+  /* ===== АДАПТИВ ===== */
+  @media (max-width: 768px) {
+    header {
+      flex-direction: column;
+      gap: 15px;
+      padding: 15px 20px;
+    }
+
+    nav ul {
+      gap: 15px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .hero h1 {
+      font-size: 38px;
+    }
+
+    .hero p {
+      font-size: 17px;
+    }
+
+    .about {
+      grid-template-columns: 1fr;
+      padding: 30px 20px;
+    }
+
+    section {
+      padding: 50px 20px;
+    }
+
+    .section-title {
+      font-size: 30px;
+    }
+  }
+</style>
+</head>
+<body>
+
+<!-- ШАПКА -->
+<header>
+  <div class="logo">🥖 Золотая <span>Корочка</span></div>
+  <nav>
+    <ul>
+      <li><a href="#about">О нас</a></li>
+      <li><a href="#products">Продукция</a></li>
+      <li><a href="#features">Почему мы</a></li>
+      <li><a href="#contacts">Контакты</a></li>
+    </ul>
+  </nav>
+</header>
+
+<!-- ГЕРОЙ -->
+<div class="hero">
+  <h1>Свежий хлеб каждый день</h1>
+  <p>Мы печём хлеб по старинным рецептам с любовью и заботой о каждом кусочке</p>
+  <a href="#products" class="btn">Смотреть меню</a>
+</div>
+
+<!-- О НАС -->
+<section id="about">
+  <h2 class="section-title">О нашей пекарне</h2>
+  <p class="section-subtitle">Традиции, проверенные временем</p>
+  <div class="about">
+    <img src="https://images.unsplash.com/photo-1608198093002-ad4e005484ec?w=800" alt="Наша пекарня">
+    <div class="about-text">
+      <h3>Испечено с душой</h3>
+      <p>Уже более 15 лет мы радуем наших гостей ароматным хлебом, свежей выпечкой и домашними пирогами. Каждое утро наши пекари начинают работу в 4 часа утра, чтобы вы могли насладиться свежим хлебом.</p>
+      <p>Мы используем только натуральные ингредиенты: муку высшего сорта, деревенское масло, свежие яйца и живые дрожжи. Никаких консервантов и улучшителей — только честная выпечка!</p>
+    </div>
+  </div>
+</section>
+
+<!-- ПРОДУКЦИЯ -->
+<section id="products">
+  <h2 class="section-title">Наша выпечка</h2><p class="section-subtitle">Выберите что-то по душе</p>
+  <div class="products">
+    <div class="product-card">
+      <img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?w=600" alt="Хлеб">
+      <div class="product-info">
+        <h3>Ржаной хлеб</h3>
+        <p>Ароматный хлеб на закваске по старинному рецепту</p>
+        <div class="price">120 ₽</div>
+      </div>
+    </div>
+    <div class="product-card">
+      <img src="https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=600" alt="Круассаны">
+      <div class="product-info">
+        <h3>Круассаны</h3>
+        <p>Нежные французские круассаны с хрустящей корочкой</p>
+        <div class="price">90 ₽</div>
+      </div>
+    </div>
+    <div class="product-card">
+      <img src="https://images.unsplash.com/photo-1568254183919-78a4f43a2877?w=600" alt="Пирог">
+      <div class="product-info">
+        <h3>Домашний пирог</h3>
+        <p>Пироги с яблоками, вишней и творогом</p>
+        <div class="price">350 ₽</div>
+      </div>
+    </div>
+    <div class="product-card">
+      <img src="https://images.unsplash.com/photo-1574085733277-851d9d856a3a?w=600" alt="Батон">
+      <div class="product-info">
+        <h3>Пшеничный батон</h3>
+        <p>Мягкий батон с золотистой корочкой</p>
+        <div class="price">75 ₽</div>
+      </div>
+    </div>
+    <div class="product-card">
+      <img src="https://images.unsplash.com/photo-1608198093002-ad4e005484ec?w=600" alt="Булочки">
+      <div class="product-info">
+        <h3>Сдобные булочки</h3>
+        <p>Булочки с корицей и ванильным кремом</p>
+        <div class="price">65 ₽</div>
+      </div>
+    </div>
+    <div class="product-card">
+      <img src="https://images.unsplash.com/photo-1599785209707-a456fc1337bb?w=600" alt="Торт">
+      <div class="product-info">
+        <h3>Медовик</h3>
+        <p>Классический медовый торт с нежным кремом</p>
+        <div class="price">550 ₽</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ПРЕИМУЩЕСТВА -->
+<section id="features">
+  <h2 class="section-title">Почему выбирают нас</h2>
+  <p class="section-subtitle">Мы гордимся тем, что делаем</p>
+  <div class="features">
+    <div class="feature">
+      <div class="feature-icon">🌾</div>
+      <h4>Натуральные ингредиенты</h4>
+      <p>Только свежие и качественные продукты без консервантов</p>
+    </div>
+    <div class="feature">
+      <div class="feature-icon">👨‍🍳</div>
+      <h4>Опытные пекари</h4>
+      <p>Наши мастера имеют более 15 лет опыта работы</p>
+    </div>
+    <div class="feature">
+      <div class="feature-icon">🔥</div>
+      <h4>Свежесть каждый день</h4>
+      <p>Вся выпечка готовится рано утром и всегда свежая</p>
+    </div>
+    <div class="feature">
+      <div class="feature-icon">❤️</div>
+      <h4>Сделано с любовью</h4>
+      <p>Мы вкладываем душу в каждое изделие</p>
+    </div>
+  </div>
+</section>
+
+<!-- ФУТЕР -->
+<footer id="contacts">
+  <div class="footer-content">
+    <div class="footer-col">
+      <h4>🥖 Золотая Корочка</h4>
+      <p>Пекарня, в которую хочется возвращаться</p>
+    </div>
+    <div class="footer-col">
+      <h4>Контакты</h4>
+      <p>📞 +7 (999) 123-45-67</p>
+      <p>✉️ info@zolotaya-korochka.ru</p>
+      <p>📍 г. Москва, ул. Хлебная, 15</p>
+    </div>
+    <div class="footer-col">
+      <h4>Часы работы</h4>
+      <p>Пн–Пт: 7:00 – 21:00</p>
+      <p>Сб–Вс: 8:00 – 22:00</p>
+    </div>
+    <div class="footer-col">
+      <h4>Мы в соцсетях</h4>
+      <a href="#">📷 Instagram</a>
+      <a href="#">📘 Facebook</a>
+      <a href="#">✈️ Telegram</a>
+    </div>
+  </div>
+  <div class="copyright">
+    © 2025 Пекарня "Золотая Корочка". Все права защищены.
+  </div>
+</footer>
+
+</body>
+</html>
